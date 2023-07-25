@@ -51,37 +51,30 @@ dependencies {
     implementation 'jsr94:jsr94:1.1' // ???
 
     // KIE Libraries: Drools/jBPM/etc
-    implementation 'org.kie:kie-api:8.41.0.Final' // Apache 2.0
-    implementation 'org.drools:drools-core:8.41.0.Final' // Apache 2.0
+    implementation 'org.kie:kie-api:7.60.0.Final' // Apache 2.0
+    implementation 'org.drools:drools-core:7.60.0.Final' // Apache 2.0
     implementation 'org.drools:drools-jsr94:7.2.0.Final' // Apache 2.0
+    runtimeOnly 'org.drools:drools-ecj:7.60.0.Final'
     // another big mess drools-compiler depends on a bunch of stuff, including xstream which depends on xmlpull which is
     //     included in xpp3:xpp3_min, ie redundant classes; so bunch of manual dependencies
-    implementation module('org.drools:drools-compiler:8.41.0.Final') // Apache 2.0
+    implementation module('org.drools:drools-compiler:7.60.0.Final') // Apache 2.0
     runtimeOnly 'org.antlr:antlr-runtime:3.5.2'
     runtimeOnly 'org.mvel:mvel2:2.3.2.Final'
     runtimeOnly module('com.thoughtworks.xstream:xstream:1.4.10')
     runtimeOnly 'xpp3:xpp3_min:1.1.4c' // leave out xmlpull here
     runtimeOnly 'com.google.protobuf:protobuf-java:3.4.0'
-    runtimeOnly 'org.kie:kie-util-maven-support:8.41.0.Final'
-    runtimeOnly 'org.drools:drools-drl-parser:8.41.0.Final'
-    runtimeOnly 'org.drools:drools-xml-support:8.41.0.Final'
-    runtimeOnly 'org.drools:drools-mvel:8.41.0.Final'
-    runtimeOnly 'org.drools:drools-ecj:8.41.0.Final'
-    runtimeOnly 'org.kie:kie-internal:8.41.0.Final'
-    runtimeOnly 'org.drools:drools-base:8.41.0.Final'
-    runtimeOnly 'org.drools:drools-kiesession:8.41.0.Final'
     // NOTE: drools java dialect options include ECLIPSE, JANINO, and NATIVE; NATIVE would be good but broken now with Java 8
     // using older version of Janino (2.5.16) as it is the latest version Drools supports
     runtimeOnly 'org.codehaus.janino:janino:2.5.16' // New BSD
     // 'org.codehaus.janino:janino:2.7.8', 'org.codehaus.janino:commons-compiler:2.7.8', 'org.codehaus.janino:commons-compiler-jdk:2.7.8'
     // ECJ latest works fine with Drools but is much bigger/etc and so far we are using mvel and not java dialect anyway
     // runtimeOnly 'org.eclipse.jdt.core.compiler:ecj:4.5.1'
-    implementation ('org.drools:drools-decisiontables:8.41.0.Final') { // Apache 2.0
+    implementation ('org.drools:drools-decisiontables:7.60.0.Final') { // Apache 2.0
         exclude group: 'org.apache.poi'
     }
-    implementation 'org.apache.poi:poi:5.2.2'
+    implementation 'org.apache.poi:poi:4.1.2'
     // NOTE: org.apache.poi:poi-ooxml-schemas is a required dependency for drools-decisiontables (through poi-ooxml), but it's a huge file and runs fine without it
-    implementation module('org.apache.poi:poi-ooxml:5.2.2')
+    implementation module('org.apache.poi:poi-ooxml:4.1.2')
 }
 
 // by default the Java plugin runs test on build, change to not do that (only run test if explicit task)
